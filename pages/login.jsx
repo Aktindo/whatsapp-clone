@@ -1,15 +1,21 @@
 import Head from "next/head";
 import Image from "next/image";
-import { auth, provider } from "../firebase";
+import { auth, googleProvider, githubProvider } from "../firebase";
 
 const Login = () => {
-  const signIn = () => {
-    auth.signInWithPopup(provider).catch(alert);
+  const signInWithGoogle = () => {
+    auth.signInWithPopup(googleProvider).catch(alert);
   };
+
+  const signInWithGithub = () => {
+    auth.signInWithPopup(githubProvider).catch(alert);
+  };
+
   return (
     <section className="container grid mx-auto place-items-center mt-10">
       <Head>
         <title>Login | Whatsapp Clone</title>
+        <link rel="icon" href="/WhatsApp_Logo.webp" />
       </Head>
 
       <div className="login-container flex flex-col">
@@ -21,10 +27,16 @@ const Login = () => {
           height={200}
         />
         <button
-          onClick={signIn}
+          onClick={signInWithGoogle}
           className="btn btn-primary mt-5 login__container__button"
         >
           Login with Google
+        </button>
+        <button
+          onClick={signInWithGithub}
+          className="btn mt-5 login__container__button"
+        >
+          Login with GitHub
         </button>
       </div>
       <div className="updates-and-acknowledgement grid justify-center w-full max-w-sm">

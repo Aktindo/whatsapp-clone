@@ -43,7 +43,7 @@ export default function Home() {
     <div className="bg-base-100 text-base-content flex font-inter">
       <Head>
         <title>Home | Whatsapp Clone</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/WhatsApp_Logo.webp" />
       </Head>
 
       <Sidebar />

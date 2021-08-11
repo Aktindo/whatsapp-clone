@@ -6,9 +6,8 @@ import { ChatScreen, NewChat, Sidebar, UserInfo } from "../../components";
 import { auth, db } from "../../firebase";
 import getRecipientEmail from "../../utils/getRecipientEmail";
 import EmailValidator from "email-validator";
-import Error from "next/error";
 
-const Chat = ({ chat, messages, error }) => {
+const Chat = ({ chat, messages }) => {
   const [user] = useAuthState(auth);
   const userChatRef = db
     .collection("chats")
