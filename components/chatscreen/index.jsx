@@ -1,4 +1,9 @@
-import { ChevronDownIcon, PaperClipIcon } from "@heroicons/react/outline";
+import {
+  ArrowDownIcon,
+  ChevronDownIcon,
+  PaperClipIcon,
+  UserIcon,
+} from "@heroicons/react/outline";
 import { EmojiHappyIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -96,10 +101,7 @@ function Chatscreen({ chat, messages, onHeaderClick }) {
 
   return (
     <div className="main-container">
-      <div
-        onClick={onHeaderClick}
-        className="cursor-pointer header bg-base-200 sticky z-40 top-0 flex items-center p-4 h-20 border-b-2 border-gray-200 dark:border-base-200 shadow-sm"
-      >
+      <div className="cursor-pointer header bg-base-200 sticky z-40 top-0 flex items-center p-4 h-20 border-b-2 border-gray-200 dark:border-base-200 shadow-sm">
         {recipient ? (
           <div className="header__recipient-avatar avatar">
             <div className="w-12 h-12 rounded-full">
@@ -137,15 +139,15 @@ function Chatscreen({ chat, messages, onHeaderClick }) {
           )}
         </div>
         <div className="header__icons">
-          <button className="btn btn-ghost btn-circle">
-            <PaperClipIcon className="w-6 h-6 text-gray-500 dark:text-gray-300" />
+          <button onClick={onHeaderClick} className="btn btn-ghost btn-circle">
+            <UserIcon className="w-6 h-6 text-gray-500 dark:text-gray-300" />
           </button>
           <button
             className="btn btn-circle btn-ghost"
             type="button"
             onClick={scrollToBottom}
           >
-            <ChevronDownIcon className="w-6 h-6 text-gray-500 dark:text-gray-300" />
+            <ArrowDownIcon className="w-6 h-6 text-gray-500 dark:text-gray-300" />
           </button>
         </div>
       </div>
@@ -205,17 +207,10 @@ function Chatscreen({ chat, messages, onHeaderClick }) {
             value={input}
             placeholder="Type a message"
             onChange={(e) => setInput(e.target.value)}
+            onFocus={() => setEmojiPickerOpen(false)}
           />
-          <button
-            type="submit"
-            onClick={sendMessage}
-            disabled={input.length ? false : true}
-            hidden
-          >
+          <button type="submit" onClick={sendMessage} disabled={!input} hidden>
             Send
-          </button>
-          <button type="button" className="btn btn-ghost btn-circle">
-            <MicrophoneIcon className="w-6 h-6 text-gray-500" />
           </button>
         </span>
       </form>

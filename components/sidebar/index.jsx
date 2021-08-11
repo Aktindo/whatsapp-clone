@@ -10,7 +10,7 @@ import { auth, db } from "../../firebase";
 import { Chat } from "..";
 import FoldingCube from "better-react-spinkit/dist/FoldingCube";
 import { useEffect, useState } from "react";
-import { MoonIcon, SunIcon } from "@heroicons/react/outline";
+import { LogoutIcon, MoonIcon, SunIcon } from "@heroicons/react/outline";
 
 const Sidebar = ({ activeChat }) => {
   const [user] = useAuthState(auth);
@@ -56,16 +56,29 @@ const Sidebar = ({ activeChat }) => {
   return (
     <section className="main-container border-r-2 lg:w-80 border-gray-100 dark:border-gray-700 sticky h-screen overflow-y-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-transparent">
       <div className="header bg-base-200 shadow-sm flex sticky top-0 z-10 justify-between items-center p-4 h-20 border-b-2 border-solid dark:border-gray-700">
-        <button
-          className="border-none btn btn-square btn-lg btn-ghost mask mask-squircle hover:bg-base-100"
-          onClick={() => auth.signOut()}
-        >
-          <div className="avatar online">
-            <div className="w-12 h-12 rounded-full">
-              <img src={user?.photoURL} alt="User Avatar" />
+        <div className="dropdown">
+          <button
+            className="border-none btn btn-square btn-lg btn-ghost mask mask-squircle hover:bg-base-100"
+            // onClick={() => auth.signOut()}
+          >
+            <div className="avatar online">
+              <div className="w-12 h-12 rounded-full">
+                <img src={user?.photoURL} alt="User Avatar" />
+              </div>
             </div>
-          </div>
-        </button>
+          </button>
+          <ul
+            tabIndex={0}
+            className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-64"
+          >
+            <li>
+              <a onClick={() => auth.signOut()} className="flex">
+                <LogoutIcon className="w-5 h-5 mr-1" /> Log Out
+              </a>
+            </li>
+          </ul>
+        </div>
+
         <div className="header__icons">
           <div className="dropdown dropdown-end">
             <div tabIndex={0} className="btn btn-ghost btn-circle">

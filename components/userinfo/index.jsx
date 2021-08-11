@@ -9,6 +9,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { auth, db } from "../../firebase";
 import getRecipientEmail from "../../utils/getRecipientEmail";
+import Timeago from "react-timeago";
 
 const UserInfo = ({ chat, onCloseButtonClick, hidden }) => {
   const [user] = useAuthState(auth);
@@ -64,7 +65,19 @@ const UserInfo = ({ chat, onCloseButtonClick, hidden }) => {
             {recipient ? recipient.username : recipientEmail}
           </p>
           <p className="text-gray-500 dark:text-gray-300 text-center">
-            haha bio go brr
+            {recipientSnapshot ? (
+              recipient?.lastSeen?.toDate() ? (
+                <p className="text-xs text-gray-500 dark:text-gray-300">
+                  Last active: <Timeago date={recipient?.lastSeen?.toDate()} />
+                </p>
+              ) : (
+                <p className="text-xs text-gray-500 dark:text-gray-300">
+                  Last active: Unavailable
+                </p>
+              )
+            ) : (
+              "..."
+            )}
           </p>
           {recipient ? (
             recipient.email === "akshit.singla.dps@gmail.com" ? (
